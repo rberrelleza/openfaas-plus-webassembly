@@ -1,0 +1,5 @@
+[package]
+name = "hello-world"
+version = "0.1.0"
+authors = ["Ramiro Berrelleza <rberrelleza@gmail.com>"]
+edition = "2018"

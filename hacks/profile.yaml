@@ -1,0 +1,14 @@
+kind: Profile
+apiVersion: openfaas.com/v1
+metadata:
+  name: krustlet
+  namespace: openfaas
+spec:
+    tolerations:
+    - key: "node.kubernetes.io/network-unavailable"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "krustlet/arch"
+      operator: "Equal"
+      value: "wasm32-wasi"
+      effect: "NoExecute"
