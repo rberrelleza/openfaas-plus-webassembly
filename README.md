@@ -1,4 +1,4 @@
 # WebAssembly + OpenfaaS The Universal Runtime for Serverless Functions
 
-See you at https://spseu20.sched.com/event/aYpr/webassembly-openfaas-the-universal-runtime-for-serverless-functions-ramiro-berrelleza-okteto
+See you at the [Serverless Practitioners Summit EU 2020!](https://spseu20.sched.com/event/aYpr/webassembly-openfaas-the-universal-runtime-for-serverless-functions-ramiro-berrelleza-okteto) 
 
