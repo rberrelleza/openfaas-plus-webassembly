@@ -7,24 +7,24 @@ NAME    := "hello-world"
 all: build
 
 build: keys
-	@{{CARGO}} build
+	@cargo build
 	wascap sign {{DEBUG}}/{{NAME}}.wasm {{DEBUG}}/{{NAME}}_signed.wasm -i {{KEYDIR}}/account.nk -u {{KEYDIR}}/module.nk -s -f -l -n {{NAME}}
 
 release: keys
-	@{{CARGO}} build --release
+	@cargo build --release
 	wascap sign {{RELEASE}}/{{NAME}}.wasm {{RELEASE}}/{{NAME}}_signed.wasm -i {{KEYDIR}}/account.nk -u {{KEYDIR}}/module.nk -s -f -l -n {{NAME}}
 
 push:
-	wasm-to-oci push {{RELEASE}}/{{NAME}}_signed.wasm webassembly.azurecr.io/{{NAME}}-wascc:v{{VERSION}}
+	wasm-to-oci push {{RELEASE}}/{{NAME}}_signed.wasm ramiro.azurecr.io/{{NAME}}-wascc:v{{VERSION}}
 
 keys: account module
 
 account:
 	@mkdir -p {{KEYDIR}}
 	nk gen account > {{KEYDIR}}/account.txt
-	awk '/Seed/{ print $$2 }' {{KEYDIR}}/account.txt > {{KEYDIR}}/account.nk
+	awk '/Seed/{ print $2 }' {{KEYDIR}}/account.txt > {{KEYDIR}}/account.nk
 
 module:
 	@mkdir -p {{KEYDIR}}
 	nk gen module > {{KEYDIR}}/module.txt
-	awk '/Seed/{ print $$2 }' {{KEYDIR}}/module.txt > {{KEYDIR}}/module.nk
+	awk '/Seed/{ print $2 }' {{KEYDIR}}/module.txt > {{KEYDIR}}/module.nk
