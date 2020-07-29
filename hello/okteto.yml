@@ -1,0 +1,12 @@
+name: openfaas-wa
+image: okteto/rust:1
+command: bash
+securityContext:
+  capabilities:
+    add:
+    - SYS_PTRACE 
+resources:
+  limits:
+    cpu: 2
+    memory: 2Gi
+

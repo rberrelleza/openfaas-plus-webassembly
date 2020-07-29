@@ -1,0 +1,10 @@
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8000
+
+functions:
+  hello-world:
+    image: webassembly.azurecr.io/greet-wascc:v0.5
+    annotations:
+      com.openfaas.profile: wascc
+      com.openfaas.health.http.path: "/"
