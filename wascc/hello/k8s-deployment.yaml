@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-wascc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world-wascc
+  template:
+    metadata:
+      labels:
+        app: hello-world-wascc
+    spec:
+      containers:
+      - image: webassembly.azurecr.io/greet-wascc:v0.5
+        imagePullPolicy: Always
+        name: greet
+        ports:
+        - containerPort: 8090
+          hostPort: 8090
+      nodeSelector:
+        kubernetes.io/role: agent
+        beta.kubernetes.io/os: linux
+        beta.kubernetes.io/arch: wasm32-wascc
+      tolerations:
+        - key: "node.kubernetes.io/network-unavailable"
+          operator: "Exists"
+          effect: "NoSchedule"
+        - key: "krustlet/arch"
+          operator: "Equal"
+          value: "wasm32-wascc"
+          effect: "NoExecute"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-wascc
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+spec:
+  type: ClusterIP  
+  ports:
+  - name: "hello-world-wascc"
+    port: 8080
+  selector:
+    app: hello-world-wascc
