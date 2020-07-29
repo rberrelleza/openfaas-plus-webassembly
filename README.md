@@ -157,5 +157,6 @@ It is true that there are certain limitations, but it's only a matter of time be
 1. Functions have a fixed port, and are only available through the Node IP, since Krustlet hasn't implemented the full Kubernetes network stack
 1. I have to use a public repository, since Krustlet doesn't support pull secrets
 1. Building the wascc sample requires complex key management and signing binaries. And there's no way (today) for Krustlet to handle this dynamically.
+1. Building wascc assemblies and getting them to run in Krustlet is still a bit of a dark art
 
 
