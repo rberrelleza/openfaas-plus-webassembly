@@ -1,7 +1,0 @@
-name: hello
-image: okteto/rust:1
-command:
-- bash
-workdir: /okteto
-forward:
-- 8080:8080
