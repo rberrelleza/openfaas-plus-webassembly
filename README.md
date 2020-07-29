@@ -148,6 +148,7 @@ Writing functions using WebAssembly brings us several benefits, such as:
 1. We can write functions on any language, and compile them to a common target/platform, without the need of containers.
 1. WebAssembly's sandbox promises better safety and isolation features.
 1. The same binary will work on any platform, from clusters to smaller edge devices.
+1. waSCC Actor SDK gives us some of the  abstractions that OpenFaaS' watchdog, specially around not having to deal with HTTP listener mechanics.
 
 On the other side, OpenFaaS lets us build, publish, deploy and scale up/down our WebAssembly functions just as easily as container-based ones. And unlike other commercial solutions, this is something that we can do in any Kubernetes cluster. 
 
