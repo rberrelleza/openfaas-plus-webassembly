@@ -1,21 +1,24 @@
-DEBUG   := "target/wasm32-unknown-unknown/debug"
-RELEASE := "target/wasm32-unknown-unknown/release"
+CARGO   := "cargo --color always"
+TARGET  := "target/wasm32-unknown-unknown"
+DEBUG   := TARGET + "/debug"
+RELEASE := TARGET + "/release"
 KEYDIR  := ".keys"
 VERSION := "0.1.0"
-NAME    := "hello-world"
+NAME    := "helloworld"
+REGISTRY := "gcr.io/ramiro-282822/hello-webassembly"
 
 all: build
 
 build: keys
-	@cargo build
+	@{{CARGO}} build
 	wascap sign {{DEBUG}}/{{NAME}}.wasm {{DEBUG}}/{{NAME}}_signed.wasm -i {{KEYDIR}}/account.nk -u {{KEYDIR}}/module.nk -s -f -l -n {{NAME}}
 
 release: keys
-	@cargo build --release
+	@{{CARGO}} build --release
 	wascap sign {{RELEASE}}/{{NAME}}.wasm {{RELEASE}}/{{NAME}}_signed.wasm -i {{KEYDIR}}/account.nk -u {{KEYDIR}}/module.nk -s -f -l -n {{NAME}}
 
 push:
-	wasm-to-oci push {{RELEASE}}/{{NAME}}_signed.wasm ramiro.azurecr.io/{{NAME}}-wascc:v{{VERSION}}
+	wasm-to-oci push {{RELEASE}}/{{NAME}}_signed.wasm {{REGISTRY}}:v{{VERSION}}
 
 keys: account module
 

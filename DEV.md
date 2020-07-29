@@ -4,6 +4,14 @@ Follow this if you want to build the sample yourself
 
 ### Requirements
 
+You can start a [remote development environment](https://github.com/okteto/okteto) with everything installed by running:
+
+```
+okteto up --deploy
+```
+
+If you want to do it the hard way:
+
 1. Rust, rustup and cargo
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -21,7 +29,7 @@ Download the binary from https://github.com/engineerd/wasm-to-oci/releases/tag/v
 
 4. [wasm-pack](https://rustwasm.github.io/wasm-pack/installer/)
 ```
-curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+cargo install wasm-pack
 ```
 
 5. [wascapp](https://github.com/wascc/wascap)

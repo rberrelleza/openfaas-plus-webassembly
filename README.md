@@ -1,12 +1,12 @@
 # WebAssembly + OpenfaaS The Universal Runtime for Serverless Functions
 
-I'll be talking about this as part of the [Serverless Practitioners Summit EU 2020!](https://spseu20.sched.com/event/aYpr/webassembly-openfaas-the-universal-runtime-for-serverless-functions-ramiro-berrelleza-okteto). See you online!
+I'll be talking about this as part of the [Serverless Practitioners Summit EU 2020](https://spseu20.sched.com/event/aYpr/webassembly-openfaas-the-universal-runtime-for-serverless-functions-ramiro-berrelleza-okteto) See you online!
 
 > Demo code and setup instructions based on https://github.com/deislabs/krustlet
 
 ## Requirements
 
-1. arkade
+1. [arkade](https://github.com/alexellis/arkade)
 ```
 curl -sLS https://dl.get-arkade.dev | sudo sh
 ```
@@ -80,7 +80,7 @@ Once the certificate is approved, you'll see the Krustlet start logging.
 
 ## Install OpenFaaS
 
-For this experiment, we are going to install OpenFaaS using arkade. We are going to set it without authentication to keep things simple. Don't ever do this in prod ;)
+For this experiment, we are going to install OpenFaaS using [arkade](https://github.com/alexellis/arkade). We are going to set it without authentication to keep things simple. Don't do this in prod ;)
 
 ```
 arkade install openfaas --clusterrole --basic-auth=false --operator --pull-policy Always --set serviceType=ClusterIP --wait 
