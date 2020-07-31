@@ -32,7 +32,7 @@ arkade get kubectl
 
 5. [Krustlet](https://github.com/deislabs/krustlet) v0.3.0
 ```
-arkade get krustlet
+Download the binary from https://github.com/deislabs/krustlet/releases/tag/v0.3.0
 ```
 
 ## Start and Configure your Cluster
@@ -71,7 +71,7 @@ ifconfig en0
 
 And finally, start the Krustlet.
 ```
-krustlet-wascc --node-ip 10.0.0.115 --cert-file=$HOME/.krustlet/config/krustlet.crt --private-key-file=$HOME/.krustlet/config/krustlet.key --bootstrap-file=$HOME/.krustlet/config/bootstrap.conf --hostname krustlet
+krustlet-wascc --node-ip $IP --cert-file=$HOME/.krustlet/config/krustlet.crt --private-key-file=$HOME/.krustlet/config/krustlet.key --bootstrap-file=$HOME/.krustlet/config/bootstrap.conf --hostname krustlet
 ```
 
 > We are using `krustlet-wascc` so we can leverage its networking capabilities. At the time of writing, `krustlet-wasi` was not able to open a network socket.
@@ -100,12 +100,31 @@ With Krustlet, we now have a cluster that can handle both container as well as W
 A profile is  way of injecting platform-specific information to OpenFaaS functions. In this, case are going to use it to set the tolerations and taints required to ensure that the function runs in the Krustlet, instead of on a regular node. 
 
 ```
+kind: Profile
+apiVersion: openfaas.com/v1
+metadata:
+  name: wascc
+  namespace: openfaas
+spec:
+    tolerations:
+    - key: "node.kubernetes.io/network-unavailable"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "krustlet/arch"
+      operator: "Equal"
+      value: "wasm32-wascc"
+      effect: "NoExecute"
+```
+
+Create the profile by running the command below:
+
+```
 kubectl apply -f hacks/profile-wascc.yaml
 ```
 
 ## Run the WebAssembly Function
 
-To create the function, we are going to use the following manifest:
+To create the function, we are going to use the following OpenFaaS manifest:
 
 ```
 provider:
@@ -135,7 +154,7 @@ After a few seconds, the function will be up and running. You can check its stat
 kubectl get pods -n=openfaas-fn
 ```
 
-Finally, let's call the function, to see everything working end to end:
+Finally, let's call the function, to see everything working end to end. 
 
 ```
 curl http://localhost:8080
@@ -144,6 +163,8 @@ curl http://localhost:8080
 ```
 $ Hello, world!
 ```
+
+> We are using `curl` instead of `faas-cli invoke` due to [current limitations](https://github.com/deislabs/krustlet/issues/293) in Kruslet's networking implementation. This should be fixed in the near future.
 
 ## Conclusion
 
