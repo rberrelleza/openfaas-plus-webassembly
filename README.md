@@ -1,4 +1,4 @@
-# WebAssembly + OpenfaaS The Universal Runtime for Serverless Functions
+# WebAssembly + OpenFaaS The Universal Runtime for Serverless Functions
 
 In this PoC, we show how you can use [OpenFaaS](https://openfaas.com) and [Krustlet](https://github.com/deislabs/krustlet) to run WebAssembly functions on any Kubernetes cluster.
 
@@ -32,7 +32,7 @@ arkade get kubectl
 
 5. [Krustlet](https://github.com/deislabs/krustlet) v0.3.0
 ```
-Download the binary from https://github.com/deislabs/krustlet/releases/tag/v0.3.0
+arkade get krustlet
 ```
 
 ## Start and Configure your Cluster
@@ -71,7 +71,7 @@ ifconfig en0
 
 And finally, start the Krustlet.
 ```
-krustlet-wascc --node-ip $IP --cert-file=$HOME/.krustlet/config/krustlet.crt --private-key-file=$HOME/.krustlet/config/krustlet.key --bootstrap-file=$HOME/.krustlet/config/bootstrap.conf --hostname krustlet
+krustlet-wascc --node-ip 10.0.0.115 --cert-file=$HOME/.krustlet/config/krustlet.crt --private-key-file=$HOME/.krustlet/config/krustlet.key --bootstrap-file=$HOME/.krustlet/config/bootstrap.conf --hostname krustlet
 ```
 
 > We are using `krustlet-wascc` so we can leverage its networking capabilities. At the time of writing, `krustlet-wasi` was not able to open a network socket.
