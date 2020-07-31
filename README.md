@@ -1,4 +1,4 @@
-# WebAssembly + OpenfaaS The Universal Runtime for Serverless Functions
+# WebAssembly + OpenFaaS The Universal Runtime for Serverless Functions
 
 In this PoC, we show how you can use [OpenFaaS](https://openfaas.com) and [Krustlet](https://github.com/deislabs/krustlet) to run WebAssembly functions on any Kubernetes cluster.
 
@@ -100,12 +100,31 @@ With Krustlet, we now have a cluster that can handle both container as well as W
 A profile is  way of injecting platform-specific information to OpenFaaS functions. In this, case are going to use it to set the tolerations and taints required to ensure that the function runs in the Krustlet, instead of on a regular node. 
 
 ```
+kind: Profile
+apiVersion: openfaas.com/v1
+metadata:
+  name: wascc
+  namespace: openfaas
+spec:
+    tolerations:
+    - key: "node.kubernetes.io/network-unavailable"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "krustlet/arch"
+      operator: "Equal"
+      value: "wasm32-wascc"
+      effect: "NoExecute"
+```
+
+Create the profile by running the command below:
+
+```
 kubectl apply -f hacks/profile-wascc.yaml
 ```
 
 ## Run the WebAssembly Function
 
-To create the function, we are going to use the following manifest:
+To create the function, we are going to use the following OpenFaaS manifest:
 
 ```
 provider:
@@ -135,7 +154,7 @@ After a few seconds, the function will be up and running. You can check its stat
 kubectl get pods -n=openfaas-fn
 ```
 
-Finally, let's call the function, to see everything working end to end:
+Finally, let's call the function, to see everything working end to end. 
 
 ```
 curl http://localhost:8080
@@ -144,6 +163,8 @@ curl http://localhost:8080
 ```
 $ Hello, world!
 ```
+
+> We are using `curl` instead of `faas-cli invoke` due to [current limitations](https://github.com/deislabs/krustlet/issues/293) in Kruslet's networking implementation. This should be fixed in the near future.
 
 ## Conclusion
 
