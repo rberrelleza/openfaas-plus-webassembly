@@ -95,7 +95,7 @@ kubectl port-forward -n openfaas svc/gateway 8000:8080
 
 ### Add the WasCC profile
 
-With Krustlet, we now have a cluster that can handle both container as well as WebAssembly-based workloads. In order to tell OpenFaaS to schedule our WebAssembly functions in the Krustlet, we are going to use OpenFaaS' brand new [profiles feature](https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/templates/crd.yaml#L109). 
+With Krustlet, we now have a cluster that can handle both container as well as WebAssembly-based workloads. In order to tell OpenFaaS to schedule our WebAssembly functions in the Krustlet, we are going to use OpenFaaS' brand new [profiles feature](https://docs.openfaas.com/reference/profiles/). 
 
 A profile is  way of injecting platform-specific information to OpenFaaS functions. In this, case are going to use it to set the tolerations and taints required to ensure that the function runs in the Krustlet, instead of on a regular node. 
 
