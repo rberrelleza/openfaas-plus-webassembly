@@ -38,7 +38,7 @@ Download the binary from https://github.com/deislabs/krustlet/releases/tag/v0.3.
 ## Start and Configure your Cluster
 
 ```
-kind cluster create
+kind create cluster
 ```
 
 Since this is an experiment, I'm using kind as my cluster. This allows me to create and tear down my cluster almost instantly, in case somethign goes wrong. That being said, this works on any Kubernetes cluster. Take a look at Krustlet's [installation instructions](https://github.com/deislabs/krustlet/blob/master/docs/intro/install.md) for more info on this.
