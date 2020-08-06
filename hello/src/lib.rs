@@ -1,22 +1,33 @@
 extern crate wascc_actor as actor;
-
-use std::collections::HashMap;
+extern crate serde;
+extern crate wascc_codec as codec;
 
 use actor::prelude::*;
+use serde::Serialize;
 
-actor_handlers! { codec::http::OP_HANDLE_REQUEST => hello,
-codec::core::OP_HEALTH_REQUEST => health }
-
-pub fn hello(r: codec::http::Request) -> HandlerResult<codec::http::Response> {
-    println(&format!("Received HTTP request: {:?}", &r));
-    Ok(codec::http::Response {
-        status_code: 200,
-        status: "OK".to_owned(),
-        header: HashMap::new(),
-        body: b"Hello, world!\n".to_vec(),
-    })
+#[derive(Serialize)]
+struct HelloResponse{
+    original: String,
+    response: String,
 }
 
-pub fn health(_h: codec::core::HealthRequest) -> HandlerResult<()> {
+actor_handlers!{
+    codec::http::OP_HANDLE_REQUEST => hello,
+    codec::core::OP_HEALTH_REQUEST => healthy
+}
+
+fn healthy(_req: codec::core::HealthRequest) -> HandlerResult<()> {
     Ok(())
+}
+
+fn hello(req: codec::http::Request) -> HandlerResult<codec::http::Response> {
+    let qs = req.query_string;
+    let resp = String::from("Hello, world!");
+
+    let response = HelloResponse{
+        original: qs,
+        response: resp,
+    };
+
+    Ok(codec::http::Response::json(response, 200, "OK"))
 }
