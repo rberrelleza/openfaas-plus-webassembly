@@ -4,7 +4,7 @@ provider:
 
 functions:
   hello-world:
-    image: webassembly.azurecr.io/greet-wascc:v0.5
+    image: gcr.io/ramiro-282822/hello-webassembly:v0.1.0
     annotations:
       com.openfaas.profile: wascc
       com.openfaas.health.http.path: "/"
