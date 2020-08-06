@@ -30,9 +30,9 @@ arkade get faas-cli
 arkade get kubectl
 ```
 
-5. [Krustlet](https://github.com/deislabs/krustlet) v0.3.0
+5. [Krustlet](https://github.com/deislabs/krustlet) v0.4.0
 ```
-Download the binary from https://github.com/deislabs/krustlet/releases/tag/v0.3.0
+Download the binary from https://github.com/deislabs/krustlet/releases/tag/v0.4.0
 ```
 
 ## Start and Configure your Cluster
