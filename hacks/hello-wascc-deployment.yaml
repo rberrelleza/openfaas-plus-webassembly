@@ -13,7 +13,7 @@ spec:
         app: hello-world-wascc
     spec:
       containers:
-      - image: webassembly.azurecr.io/greet-wascc:v0.5
+      - image: gcr.io/ramiro-282822/hello-webassembly:v0.1.0
         imagePullPolicy: Always
         name: greet
         ports:
