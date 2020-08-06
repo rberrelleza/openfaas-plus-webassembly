@@ -38,7 +38,7 @@ Download the binary from https://github.com/deislabs/krustlet/releases/tag/v0.3.
 ## Start and Configure your Cluster
 
 ```
-kind cluster create
+kind create cluster
 ```
 
 Since this is an experiment, I'm using kind as my cluster. This allows me to create and tear down my cluster almost instantly, in case somethign goes wrong. That being said, this works on any Kubernetes cluster. Take a look at Krustlet's [installation instructions](https://github.com/deislabs/krustlet/blob/master/docs/intro/install.md) for more info on this.
@@ -51,6 +51,11 @@ Open a second terminal window, and activate your kind's cluster Kubeconfig conte
 
 ```
 kubectl cluster-info --context kind-kind
+```
+
+Clone the repository:
+```
+git clone https://github.com/rberrelleza/openfaas-plus-webassembly
 ```
 
 Now, run the bootstrap script. This will create all the configurations and keys needed to be able to register the Krustlet node with your cluster.
