@@ -6,6 +6,14 @@ Why does it matter? Well, I'll be talking about this as part of the [Serverless 
 
 See you online!
 
+--- 
+
+Talk is now available online!
+https://www.youtube.com/watch?v=so2dGQGKTpE
+
+---
+
+
 > Demo code and setup instructions based on https://github.com/deislabs/krustlet
 
 ## Requirements
