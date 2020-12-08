@@ -1,7 +1,8 @@
 CARGO   := "cargo --color always"
-TARGET  := "target/wasm32-unknown-unknown"
-DEBUG   := TARGET + "/debug"
-RELEASE := TARGET + "/release"
+TARGET  := "wasm32-unknown-unknown"
+TARGET_DIR := "target/" + TARGET
+DEBUG   := TARGET_DIR + "/debug"
+RELEASE := TARGET_DIR + "/release"
 KEYDIR  := ".keys"
 VERSION := "0.1.0"
 NAME    := "helloworld"

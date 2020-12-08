@@ -38,9 +38,9 @@ arkade get faas-cli
 arkade get kubectl
 ```
 
-5. [Krustlet](https://github.com/deislabs/krustlet) v0.3.0
+5. [Krustlet](https://github.com/deislabs/krustlet) v0.4.0
 ```
-Download the binary from https://github.com/deislabs/krustlet/releases/tag/v0.3.0
+Download the binary from https://github.com/deislabs/krustlet/releases/tag/v0.4.0
 ```
 
 ## Start and Configure your Cluster
@@ -89,7 +89,7 @@ krustlet-wascc --node-ip $IP --cert-file=$HOME/.krustlet/config/krustlet.crt --p
 
 > We are using `krustlet-wascc` so we can leverage its networking capabilities. At the time of writing, `krustlet-wasi` was not able to open a network socket.
 
-When the Krustlet starts, it won't long anything. It is waiting for a certificate to be approved on your cluster. To do it, go back to the terminal where you started the cluster, and run:
+When the Krustlet starts, it'll be  waiting for a certificate to be approved on your cluster before it fully connects. To do it, go back to the terminal where you started the cluster, and run:
 
 ```
 kubectl certificate approve krustlet-tls

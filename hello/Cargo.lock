@@ -22,6 +22,7 @@ checksum = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
 name = "helloworld"
 version = "0.1.0"
 dependencies = [
+ "serde",
  "wascc-actor",
  "wascc-codec 0.7.2",
 ]
@@ -107,6 +108,9 @@ name = "serde"
 version = "1.0.114"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5317f7588f0a5078ee60ef675ef96735a1442132dc645eb1d12c018620ed8cd3"
+dependencies = [
+ "serde_derive",
+]
 
 [[package]]
 name = "serde_bytes"
